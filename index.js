@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+// To prepare for Mongoose 7 where 'strictQuery' will be false by default,
+// you can explicitly set it to false.
+mongoose.set("strictQuery", false);
 const dbConfig = require("./config/db.config");
 
 const auth = require("./middlewares/auth.js");
