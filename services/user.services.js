@@ -116,7 +116,7 @@ async function createNewOTP(params, callback) {
     `OTP is ${otp}. expires in 15 minutes, your mobile is ${myNewString}`
   );
 
-  let transporter = nodemailer.createTransport({
+  /*let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
     secure: true,
@@ -135,7 +135,7 @@ async function createNewOTP(params, callback) {
   });
 
   console.log("Message sent: %s", info.messageId);
-
+*/
   let url = axios
     .get(
       `http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0`
