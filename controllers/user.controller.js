@@ -42,8 +42,9 @@ exports.userProfile = (req, res, next) => {
   return res.status(401).json({ message: "Authorized User!!" });
 };
 
-
 exports.otpLogin = (req, res, next) => {
+  console.log(req);
+  console.log(req.body);
   userServices.createNewOTP(req.body, (error, results) => {
     if (error) {
       return next(error);
