@@ -6,7 +6,7 @@ const axios = require("axios").default;
 const otpGenerator = require("otp-generator");
 const crypto = require("crypto");
 const key = "verysecretkey"; // Key for cryptograpy. Keep it secret
-var msg91 = require("msg91")("1", "1", "1");
+//var msg91 = require("msg91")("1", "1", "1");
 
 var nodemailer = require("nodemailer");
 
