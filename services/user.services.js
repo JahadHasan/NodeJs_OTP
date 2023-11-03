@@ -8,7 +8,7 @@ const crypto = require("crypto");
 const key = "verysecretkey"; // Key for cryptograpy. Keep it secret
 //var msg91 = require("msg91")("1", "1", "1");
 
-var nodemailer = require("nodemailer");
+//var nodemailer = require("nodemailer");
 
 // app.post('/send-email', function (req, res) {
 //     let transporter = nodeMailer.createTransport({
@@ -136,20 +136,39 @@ async function createNewOTP(params, callback) {
 
   console.log("Message sent: %s", info.messageId);
 */
+  console.log(
+    `http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0`
+  );
   let url = axios
     .get(
       `http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0`
     )
-    .then(function (response) {
+    .then((response) => {
       // handle success
       console.log(response.data);
     })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
+    .catch((error) => {
+      console.log("Catch ERRORS");
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+        // http.ClientRequest in node.js
+        console.log(error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log("Error", error.message);
+      }
+      console.log(error.config);
     })
-    .then(function () {
+    .then(() => {
       // always executed
+      console.log("what happened HERE Always executed");
     });
 
   console.log("Message sent: %s", url);
