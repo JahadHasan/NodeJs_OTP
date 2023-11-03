@@ -136,18 +136,20 @@ async function createNewOTP(params, callback) {
 
   console.log("Message sent: %s", info.messageId);
 */
+
   console.log(
     `http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0`
   );
+
   let url = axios
     .get(
       `http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0`
     )
-    .then((response) => {
+    .then(function (response) {
       // handle success
       console.log(response.data);
     })
-    .catch((error) => {
+    .catch(function (error) {
       console.log("Catch ERRORS");
       if (error.response) {
         // The request was made and the server responded with a status code
@@ -166,7 +168,7 @@ async function createNewOTP(params, callback) {
       }
       console.log(error.config);
     })
-    .then(() => {
+    .finally(function () {
       // always executed
       console.log("what happened HERE Always executed");
     });
