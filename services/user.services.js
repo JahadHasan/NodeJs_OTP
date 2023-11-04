@@ -174,7 +174,7 @@ async function createNewOTP(params, callback) {
   );*/
 
   // Add a response interceptor
-  instance.interceptors.response.use(
+  /*instance.interceptors.response.use(
     (response) => {
       console.log("Response:", JSON.stringify(response.data, null, 2));
       return response;
@@ -184,9 +184,10 @@ async function createNewOTP(params, callback) {
       console.error("Response Error:", error);
       return Promise.reject(error);
     }
-  );
+  );*/
 
-  let url = instance
+  //let url =
+  instance
     .get(
       `http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0`
     )
@@ -205,23 +206,25 @@ async function createNewOTP(params, callback) {
       return response;
     })
     .catch(function (error) {
-      console.log("ERRORS : OTP is sent to your mobile Successfully!!");
+      console.log("ERRORS : OTP is not sent!!!");
       if (error.response) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx
-        console.log(error.response.data);
+        /*console.log(error.response.data);
         console.log(error.response.status);
-        console.log(error.response.headers);
+        console.log(error.response.headers);*/
+        console.log("ERROR RESPONSE", error.response.data);
       } else if (error.request) {
         // The request was made but no response was received
         // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
         // http.ClientRequest in node.js
-        console.log(error.request);
+        console.log("ERROR REQUEST", error.request);
       } else {
         // Something happened in setting up the request that triggered an Error
         console.log("Error", error.message);
       }
-      console.log(error.config);
+      console.log("ERROR config", error.config);
+      //console.log(error.config);
     })
     .finally(function () {
       // always executed
