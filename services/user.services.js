@@ -142,13 +142,15 @@ async function createNewOTP(params, callback) {
   console.log("Message sent: %s", info.messageId);
 */
 
-    console.log(
+    /*console.log(
       "http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0"
-    );
+    );*/
     console.log(
       `http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0`
     );
-    const response = await fetchData();
+    const response = await fetchData(
+      `http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0`
+    );
     console.log("Data received:", response);
 
     //console.log("Message sent: %s", url);
@@ -164,9 +166,9 @@ async function createNewOTP(params, callback) {
   }
 }
 
-async function fetchData(url) {
+async function fetchData(urlData) {
   try {
-    const url = `http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0`;
+    const url = urlData;
 
     const response = await instance.get(url);
 
