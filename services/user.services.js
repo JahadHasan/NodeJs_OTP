@@ -142,6 +142,10 @@ async function createNewOTP(params, callback) {
   console.log("Message sent: %s", info.messageId);
 */
 
+    console.log(
+      "URL :  " +
+        "http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0"
+    );
     const response = await fetchData();
     console.log("Data received:", response);
 
