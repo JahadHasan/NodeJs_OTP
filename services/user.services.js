@@ -161,7 +161,7 @@ async function createNewOTP(params, callback) {
   //const instance = axios.create();
 
   // Add a request interceptor
-  instance.interceptors.request.use(
+  /*instance.interceptors.request.use(
     (request) => {
       console.log("Starting Request", JSON.stringify(request, null, 2));
       return request;
@@ -171,7 +171,7 @@ async function createNewOTP(params, callback) {
       console.error("Request Error:", error);
       return Promise.reject(error);
     }
-  );
+  );*/
 
   // Add a response interceptor
   instance.interceptors.response.use(
@@ -192,14 +192,20 @@ async function createNewOTP(params, callback) {
     )
     .then(function (response) {
       // handle success
+      console.log("OTP is sent to your mobile Successfully!!");
       console.log(response.data);
+      console.log("STATUS : ");
       console.log(response.status);
+      console.log("STATUSTEXT : ");
       console.log(response.statusText);
+      console.log("HEADERS : ");
       console.log(response.headers);
+      console.log("Config : ");
       console.log(response.config);
+      return response;
     })
     .catch(function (error) {
-      console.log("Catch ERRORS");
+      console.log("ERRORS : OTP is sent to your mobile Successfully!!");
       if (error.response) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx
