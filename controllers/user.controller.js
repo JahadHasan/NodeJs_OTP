@@ -43,8 +43,8 @@ exports.userProfile = (req, res, next) => {
 };
 
 exports.otpLogin = (req, res, next) => {
-  console.log(req);
-  console.log(req.body);
+  /*console.log(req);
+  console.log(req.body);*/
   userServices.createNewOTP(req.body, (error, results) => {
     if (error) {
       return next(error);
