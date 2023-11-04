@@ -73,54 +73,55 @@ async function register(params, callback) {
 }
 
 async function createNewOTP(params, callback) {
-  // Generate a 6 digit numeric OTP
-  const otp = otpGenerator.generate(6, {
-    alphabets: false,
-    upperCase: false,
-    specialChars: false,
-  });
-  const ttl = 15 * 60 * 1000; //15 Minutes in miliseconds
-  const expires = Date.now() + ttl; //timestamp to 5 minutes in the future
-  const data = `${params.phone}.${otp}.${expires}`; // phone.otp.expiry_timestamp
-  const hash = crypto.createHmac("sha256", key).update(data).digest("hex"); // creating SHA256 hash of the data
-  const fullHash = `${hash}.${expires}`; // Hash.expires, format to send to the user
-  // you have to implement the function to send SMS yourself. For demo purpose. let's assume it's called sendSMS
-  // sendSMS(phone, `Your OTP is ${otp}. it will expire in 5 minutes`);
+  try {
+    // Generate a 6 digit numeric OTP
+    const otp = otpGenerator.generate(6, {
+      alphabets: false,
+      upperCase: false,
+      specialChars: false,
+    });
+    const ttl = 15 * 60 * 1000; //15 Minutes in miliseconds
+    const expires = Date.now() + ttl; //timestamp to 5 minutes in the future
+    const data = `${params.phone}.${otp}.${expires}`; // phone.otp.expiry_timestamp
+    const hash = crypto.createHmac("sha256", key).update(data).digest("hex"); // creating SHA256 hash of the data
+    const fullHash = `${hash}.${expires}`; // Hash.expires, format to send to the user
+    // you have to implement the function to send SMS yourself. For demo purpose. let's assume it's called sendSMS
+    // sendSMS(phone, `Your OTP is ${otp}. it will expire in 5 minutes`);
 
-  var myString = `${params.phone}`;
-  var myNewString = myString.replace("+", "");
-  var otpMessage = `Amin OTP is ${otp}. expires in 15 minutes, your mobile is ${myNewString}.`;
+    var myString = `${params.phone}`;
+    var myNewString = myString.replace("+", "");
+    var otpMessage = `Amin OTP is ${otp}. expires in 15 minutes, your mobile is ${myNewString}.`;
 
-  // let transporter = nodemailer.createTransport({
-  //     host: 'smtp.gmail.com',
-  //     port: 465,
-  //     secure: true,
-  //     auth: {
-  //         user: 'yetor8080@gmail.com',
-  //         pass: 'Samraa214177'
-  //     }
-  // });
-  // let  mailOptions = {
-  //     from: 'yetor8080@gmail.com',
-  //     to: 'ameenbadri7@gmail.com',
-  //     subject: `OTP is ${otp}.`,
-  //     text: `${otpMessage}`,
-  // };
+    // let transporter = nodemailer.createTransport({
+    //     host: 'smtp.gmail.com',
+    //     port: 465,
+    //     secure: true,
+    //     auth: {
+    //         user: 'yetor8080@gmail.com',
+    //         pass: 'Samraa214177'
+    //     }
+    // });
+    // let  mailOptions = {
+    //     from: 'yetor8080@gmail.com',
+    //     to: 'ameenbadri7@gmail.com',
+    //     subject: `OTP is ${otp}.`,
+    //     text: `${otpMessage}`,
+    // };
 
-  // transporter.sendMail(mailOptions, function (error, info) {
-  //     if (error) {
-  //         console.log(error);
-  //     } else {
-  //         console.log('Email sent: ' + info.response);
-  //         console.log(response);
-  //     }
-  // });
+    // transporter.sendMail(mailOptions, function (error, info) {
+    //     if (error) {
+    //         console.log(error);
+    //     } else {
+    //         console.log('Email sent: ' + info.response);
+    //         console.log(response);
+    //     }
+    // });
 
-  console.log(
-    `OTP is ${otp}. expires in 15 minutes, your mobile is ${myNewString}`
-  );
+    console.log(
+      `OTP is ${otp}. expires in 15 minutes, your mobile is ${myNewString}`
+    );
 
-  /*let transporter = nodemailer.createTransport({
+    /*let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
     secure: true,
@@ -141,12 +142,12 @@ async function createNewOTP(params, callback) {
   console.log("Message sent: %s", info.messageId);
 */
 
-  /*console.log(
+    /*console.log(
     `http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0`
   );*/
 
-  // Add a request interceptor
-  /*axios.interceptors.request.use((request) => {
+    // Add a request interceptor
+    /*axios.interceptors.request.use((request) => {
     console.log("Starting Request", request);
     return request;
   });
@@ -157,11 +158,11 @@ async function createNewOTP(params, callback) {
     return response;
   });*/
 
-  // Create an Axios instance
-  //const instance = axios.create();
+    // Create an Axios instance
+    //const instance = axios.create();
 
-  // Add a request interceptor
-  /*instance.interceptors.request.use(
+    // Add a request interceptor
+    /*instance.interceptors.request.use(
     (request) => {
       console.log("Starting Request", JSON.stringify(request, null, 2));
       return request;
@@ -173,8 +174,8 @@ async function createNewOTP(params, callback) {
     }
   );*/
 
-  // Add a response interceptor
-  /*instance.interceptors.response.use(
+    // Add a response interceptor
+    /*instance.interceptors.response.use(
     (response) => {
       console.log("Response:", JSON.stringify(response.data, null, 2));
       return response;
@@ -186,39 +187,11 @@ async function createNewOTP(params, callback) {
     }
   );*/
 
-  //let url =
-  url = "";
+    //let url =
+    //url = "";
 
-  function fetchAndReturnData() {
-    return instance
-      .get(
-        "http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0"
-      )
-      .then((response) => {
-        // handle success
-        console.log("OTP is sent to your mobile Successfully!!");
-        console.log(response.data);
-        console.log("STATUS : ");
-        console.log(response.status);
-        console.log("STATUSTEXT : ");
-        console.log(response.statusText);
-        console.log("HEADERS : ");
-        console.log(response.headers);
-        console.log("Config : ");
-        console.log(response.config);
-        // Return the response data
-        return response.data; // This could also be `response` if you need the full response.
-      })
-      .catch((error) => {
-        // Handle any errors
-        console.error("Error fetching data:", error);
-        // You could also rethrow the error or handle it differently
-        throw error;
-      });
-  }
-
-  // Usage
-  fetchAndReturnData()
+    // Usage
+    /*fetchAndReturnData()
     .then((data) => {
       console.log("Data received:", data);
     })
@@ -230,15 +203,36 @@ async function createNewOTP(params, callback) {
       // always executed
       console.log("what happened HERE Always executed");
       //url = "FINALLY";
-    });
+    });*/
+    const response = await fetchData();
+    console.log("Data received:", response);
 
-  //console.log("Message sent: %s", url);
+    //console.log("Message sent: %s", url);
 
-  // msg91.send(`+91${params.phone}`, otpMessage, function (err, response) {
+    // msg91.send(`+91${params.phone}`, otpMessage, function (err, response) {
 
-  // });
-
+    // });
+  } catch (error) {
+    // Handle any errors
+    console.error("Error fetching data:", error);
+    throw error; // Optionally rethrow to allow the caller to handle
+  }
   return callback(null, fullHash);
+}
+
+async function fetchData(url) {
+  try {
+    const url =
+      "http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0";
+
+    const response = await instance.get(url);
+    // You can now return the response data
+    return response.data;
+  } catch (error) {
+    // Handle any errors
+    console.error("Error fetching data:", error);
+    throw error; // Optionally rethrow to allow the caller to handle
+  }
 }
 
 async function verifyOTP(params, callback) {
