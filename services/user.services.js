@@ -1,7 +1,7 @@
 const User = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const auth = require("../middlewares/auth.js");
-const axiosRequest = require("axios").default;
+const axiosRequest = require("axios");
 //const axios = require("axios");
 
 // Create an Axios instance
@@ -188,58 +188,51 @@ async function createNewOTP(params, callback) {
 
   //let url =
   url = "";
-  instance
-    .get(
-      `http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0`
-    )
-    .then(function (response) {
-      // handle success
-      console.log("OTP is sent to your mobile Successfully!!");
-      console.log(response.data);
-      console.log("STATUS : ");
-      console.log(response.status);
-      console.log("STATUSTEXT : ");
-      console.log(response.statusText);
-      console.log("HEADERS : ");
-      console.log(response.headers);
-      console.log("Config : ");
-      console.log(response.config);
-      // If you need to "assign" it, you can now do so
-      url = response.data;
-      //return response;
+
+  function fetchAndReturnData() {
+    return instance
+      .get(
+        "http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0"
+      )
+      .then((response) => {
+        // handle success
+        console.log("OTP is sent to your mobile Successfully!!");
+        console.log(response.data);
+        console.log("STATUS : ");
+        console.log(response.status);
+        console.log("STATUSTEXT : ");
+        console.log(response.statusText);
+        console.log("HEADERS : ");
+        console.log(response.headers);
+        console.log("Config : ");
+        console.log(response.config);
+        // Return the response data
+        return response.data; // This could also be `response` if you need the full response.
+      })
+      .catch((error) => {
+        // Handle any errors
+        console.error("Error fetching data:", error);
+        // You could also rethrow the error or handle it differently
+        throw error;
+      });
+  }
+
+  // Usage
+  fetchAndReturnData()
+    .then((data) => {
+      console.log("Data received:", data);
     })
-    .catch(function (error) {
-      console.log("ERRORS : OTP is not sent!!!");
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        /*console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);*/
-        console.log("ERROR RESPONSE", error.response.data);
-        url = error.response.data;
-      } else if (error.request) {
-        // The request was made but no response was received
-        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-        // http.ClientRequest in node.js
-        console.log("ERROR REQUEST", error.request);
-        url = error.request;
-      } else {
-        // Something happened in setting up the request that triggered an Error
-        console.log("Error", error.message);
-        url = error.message;
-      }
-      console.log("ERROR config", error.config);
-      url = error.config;
-      //console.log(error.config);
+    .catch((error) => {
+      // Handle errors when calling the function
+      console.error("Error:", error);
     })
     .finally(function () {
       // always executed
       console.log("what happened HERE Always executed");
-      url = "FINALLY";
+      //url = "FINALLY";
     });
 
-  console.log("Message sent: %s", url);
+  //console.log("Message sent: %s", url);
 
   // msg91.send(`+91${params.phone}`, otpMessage, function (err, response) {
 
