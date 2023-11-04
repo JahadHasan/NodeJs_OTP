@@ -141,9 +141,9 @@ async function createNewOTP(params, callback) {
   console.log("Message sent: %s", info.messageId);
 */
 
-  console.log(
+  /*console.log(
     `http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0`
-  );
+  );*/
 
   // Add a request interceptor
   /*axios.interceptors.request.use((request) => {
@@ -187,6 +187,7 @@ async function createNewOTP(params, callback) {
   );*/
 
   //let url =
+  url = "";
   instance
     .get(
       `http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0`
@@ -203,7 +204,9 @@ async function createNewOTP(params, callback) {
       console.log(response.headers);
       console.log("Config : ");
       console.log(response.config);
-      return response;
+      // If you need to "assign" it, you can now do so
+      url = response.data;
+      //return response;
     })
     .catch(function (error) {
       console.log("ERRORS : OTP is not sent!!!");
@@ -214,21 +217,26 @@ async function createNewOTP(params, callback) {
         console.log(error.response.status);
         console.log(error.response.headers);*/
         console.log("ERROR RESPONSE", error.response.data);
+        url = error.response.data;
       } else if (error.request) {
         // The request was made but no response was received
         // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
         // http.ClientRequest in node.js
         console.log("ERROR REQUEST", error.request);
+        url = error.request;
       } else {
         // Something happened in setting up the request that triggered an Error
         console.log("Error", error.message);
+        url = error.message;
       }
       console.log("ERROR config", error.config);
+      url = error.config;
       //console.log(error.config);
     })
     .finally(function () {
       // always executed
       console.log("what happened HERE Always executed");
+      url = "FINALLY";
     });
 
   console.log("Message sent: %s", url);
