@@ -142,68 +142,6 @@ async function createNewOTP(params, callback) {
   console.log("Message sent: %s", info.messageId);
 */
 
-    /*console.log(
-    `http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0`
-  );*/
-
-    // Add a request interceptor
-    /*axios.interceptors.request.use((request) => {
-    console.log("Starting Request", request);
-    return request;
-  });
-
-  // Add a response interceptor
-  axios.interceptors.response.use((response) => {
-    console.log("Response:", response);
-    return response;
-  });*/
-
-    // Create an Axios instance
-    //const instance = axios.create();
-
-    // Add a request interceptor
-    /*instance.interceptors.request.use(
-    (request) => {
-      console.log("Starting Request", JSON.stringify(request, null, 2));
-      return request;
-    },
-    (error) => {
-      // Do something with request error
-      console.error("Request Error:", error);
-      return Promise.reject(error);
-    }
-  );*/
-
-    // Add a response interceptor
-    /*instance.interceptors.response.use(
-    (response) => {
-      console.log("Response:", JSON.stringify(response.data, null, 2));
-      return response;
-    },
-    (error) => {
-      // Do something with response error
-      console.error("Response Error:", error);
-      return Promise.reject(error);
-    }
-  );*/
-
-    //let url =
-    //url = "";
-
-    // Usage
-    /*fetchAndReturnData()
-    .then((data) => {
-      console.log("Data received:", data);
-    })
-    .catch((error) => {
-      // Handle errors when calling the function
-      console.error("Error:", error);
-    })
-    .finally(function () {
-      // always executed
-      console.log("what happened HERE Always executed");
-      //url = "FINALLY";
-    });*/
     const response = await fetchData();
     console.log("Data received:", response);
 
@@ -212,12 +150,12 @@ async function createNewOTP(params, callback) {
     // msg91.send(`+91${params.phone}`, otpMessage, function (err, response) {
 
     // });
+    return callback(null, fullHash);
   } catch (error) {
     // Handle any errors
     console.error("Error fetching data:", error);
     throw error; // Optionally rethrow to allow the caller to handle
   }
-  return callback(null, fullHash);
 }
 
 async function fetchData(url) {
