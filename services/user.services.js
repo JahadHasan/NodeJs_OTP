@@ -1,7 +1,11 @@
 const User = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const auth = require("../middlewares/auth.js");
-const axios = require("axios").default;
+const axiosRequest = require("axios").default;
+//const axios = require("axios");
+
+// Create an Axios instance
+const instance = axiosRequest.create();
 
 const otpGenerator = require("otp-generator");
 const crypto = require("crypto");
@@ -141,13 +145,66 @@ async function createNewOTP(params, callback) {
     `http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0`
   );
 
-  let url = axios
+  axios.get("https://api.github.com/users/mapbox").then((response) => {
+    console.log(response.data);
+    console.log(response.status);
+    console.log(response.statusText);
+    console.log(response.headers);
+    console.log(response.config);
+  });
+
+  // Add a request interceptor
+  /*axios.interceptors.request.use((request) => {
+    console.log("Starting Request", request);
+    return request;
+  });
+
+  // Add a response interceptor
+  axios.interceptors.response.use((response) => {
+    console.log("Response:", response);
+    return response;
+  });*/
+
+  // Create an Axios instance
+  //const instance = axios.create();
+
+  // Add a request interceptor
+  instance.interceptors.request.use(
+    (request) => {
+      console.log("Starting Request", JSON.stringify(request, null, 2));
+      return request;
+    },
+    (error) => {
+      // Do something with request error
+      console.error("Request Error:", error);
+      return Promise.reject(error);
+    }
+  );
+
+  // Add a response interceptor
+  instance.interceptors.response.use(
+    (response) => {
+      console.log("Response:", JSON.stringify(response.data, null, 2));
+      return response;
+    },
+    (error) => {
+      // Do something with response error
+      console.error("Response Error:", error);
+      return Promise.reject(error);
+    }
+  );
+
+  let url = instance
     .get(
       `http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0`
     )
     .then(function (response) {
       // handle success
       console.log(response.data);
+      console.log(response.status);
+      console.log(response.statusText);
+      console.log(response.headers);
+      console.log(response.config);
     })
     .catch(function (error) {
       console.log("Catch ERRORS");
