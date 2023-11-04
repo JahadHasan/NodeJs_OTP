@@ -145,14 +145,6 @@ async function createNewOTP(params, callback) {
     `http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0`
   );
 
-  axios.get("https://api.github.com/users/mapbox").then((response) => {
-    console.log(response.data);
-    console.log(response.status);
-    console.log(response.statusText);
-    console.log(response.headers);
-    console.log(response.config);
-  });
-
   // Add a request interceptor
   /*axios.interceptors.request.use((request) => {
     console.log("Starting Request", request);
