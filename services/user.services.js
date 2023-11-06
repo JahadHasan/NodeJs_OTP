@@ -90,7 +90,7 @@ async function createNewOTP(params, callback) {
 
     var myString = `${params.phone}`;
     var myNewString = myString.replace("+", "");
-    var otpMessage = `Amin OTP is ${otp}. expires in 15 minutes, your mobile is ${myNewString}.`;
+    var otpMessage = `Welcome to Brand Room, your code is ${otp}. expires in 15 minutes, your mobile is ${myNewString}.`;
 
     // let transporter = nodemailer.createTransport({
     //     host: 'smtp.gmail.com',
