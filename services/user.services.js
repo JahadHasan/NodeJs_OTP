@@ -145,12 +145,22 @@ async function createNewOTP(params, callback) {
     /*console.log(
       "http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0"
     );*/
-    console.log(
+
+    /* var newUrl =
+      `https://bms.syriatel.sy/API/SendTemplateSMS.aspx?user_name=BRANDROOM1password=P@123456&template_code=BRANDROOM1_T1&param_list=${otpMessage}&sender=BRANDROOMto=${myNewString}`;
+*/
+    /*console.log(
       `http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0`
+    );*/
+    console.log(
+      `https://bms.syriatel.sy/API/SendTemplateSMS.aspx?user_name=BRANDROOM1password=P@123456&template_code=BRANDROOM1_T1&param_list=${otpMessage}&sender=BRANDROOMto=${myNewString}`
     );
     const response = await fetchData(
-      `http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0`
+      `https://bms.syriatel.sy/API/SendTemplateSMS.aspx?user_name=BRANDROOM1password=P@123456&template_code=BRANDROOM1_T1&param_list=${otpMessage}&sender=BRANDROOMto=${myNewString}`
+
+      // `http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0`
     );
+
     console.log("Data received:", response);
 
     //console.log("Message sent: %s", url);
