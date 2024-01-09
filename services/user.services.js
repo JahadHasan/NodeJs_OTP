@@ -149,18 +149,16 @@ async function createNewOTP(params, callback) {
     /* var newUrl =
       `https://bms.syriatel.sy/API/SendTemplateSMS.aspx?user_name=BRANDROOM1password=P@123456&template_code=BRANDROOM1_T1&param_list=${otpMessage}&sender=BRANDROOMto=${myNewString}`;
 */
-    console.log(
-      `http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0`
-    );
     /*console.log(
-      `https://bms.syriatel.sy/API/SendTemplateSMS.aspx?user_name=BRANDROOM1&password=P@12345&template_code=BRANDROOM1_T1&param_list=${otp}&sender=BRANDROOM&to=${myNewString}`
-    );*/
-    const response = await fetchData(
-      //`https://bms.syriatel.sy/API/SendTemplateSMS.aspx?user_name=BRANDROOM1&password=P@12345&template_code=BRANDROOM1_T1&param_list=${otp}&sender=BRANDROOM&to=${myNewString}`
-
-      // `https://bms.syriatel.sy/API/SendTemplateSMS.aspx?user_name=BRANDROOM1password=P@12345&template_code=BRANDROOM1_T1&param_list=${otpMessage}&sender=BRANDROOM&to=${myNewString}`
-
       `http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0`
+    );*/
+    console.log(
+      `https://bms.syriatel.sy/API/SendTemplateSMS.aspx?user_name=BRANDROOM1&password=P@12345&template_code=BRANDROOM1_T1&param_list=${otp}&sender=BRANDROOM&to=${myNewString}`
+    );
+    const response = await fetchData(
+      `https://bms.syriatel.sy/API/SendTemplateSMS.aspx?user_name=BRANDROOM1&password=P@12345&template_code=BRANDROOM1_T1&param_list=${otp}&sender=BRANDROOM&to=${myNewString}`
+      // `https://bms.syriatel.sy/API/SendTemplateSMS.aspx?user_name=BRANDROOM1password=P@12345&template_code=BRANDROOM1_T1&param_list=${otpMessage}&sender=BRANDROOM&to=${myNewString}`
+      //`http://www.ciedco-sms.net/api/sendsms.php?username=souhailsawaf@gmail.com&password=1234567890a&mno=${myNewString}&msg=${otpMessage}&sid=ciedco-sms&fl=0&mt=0`
     );
 
     console.log("Data received:", response);
