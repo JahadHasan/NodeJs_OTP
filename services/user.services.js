@@ -179,9 +179,9 @@ async function createNewOTP(params, callback) {
 async function fetchData(urlData) {
   try {
     const url = urlData;
-
+    console.log(url);
     const response = await instance.get(url);
-
+    console.log("RESPONSE from FETCH DATA:", response);
     // You can now return the response data
     return response.data;
   } catch (error) {
