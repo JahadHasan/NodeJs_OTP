@@ -43,10 +43,11 @@ exports.userProfile = (req, res, next) => {
 };
 
 exports.otpLogin = (req, res, next) => {
-  /*console.log(req);
-  console.log(req.body);*/
+  console.log(req);
+  console.log(req.body);
   userServices.createNewOTP(req.body, (error, results) => {
     if (error) {
+      console.log(error);
       return next(error);
     }
     return res.status(200).send({
